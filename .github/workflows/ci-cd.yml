@@ -61,7 +61,7 @@ jobs:
 
       - name: Push de l'image Frontend vers Docker Hub
         run: |
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/angular-app:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/angularapp:latest
 
 
 
