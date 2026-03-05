@@ -21,7 +21,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build backend image
-        run: docker build -t spring-app ./springboot
+        run: docker build -t spring-app ./springboot/app
 
       - name: Build frontend image
         run: docker build -t angular-app ./angular-app
