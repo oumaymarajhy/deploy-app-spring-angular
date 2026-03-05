@@ -1,13 +1,25 @@
-version: "3.3"
+version: "3.8"
+
 services:
-  angular-app:
-    image: angular-app
+
+  mysql:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'demo'
+      MYSQL_ROOT_USERNAME: 'root'
+      MYSQL_ROOT_PASSWORD: 'root'
     ports:
-      - "0.0.0.0:4200:80"      
+      - '3306:3306'
+    volumes:
+      - demo:/var/lib/mysql
+
   spring-boot-app:
+    build:
+      context: ./springboot/app
     image: spring-app
     ports:
-      - "0.0.0.0:8081:8081"
+      - "8081:8081"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/demo
       - SPRING_DATASOURCE_USERNAME=root
@@ -21,16 +33,12 @@ services:
     depends_on:
       - mysql
 
-  mysql:
-    image: mysql:5.7
-    restart: always
-    environment:
-      MYSQL_DATABASE: 'demo'
-      MYSQL_ROOT_USERNAME: 'root'
-      MYSQL_ROOT_PASSWORD: 'root'
+  angular-app:
+    build:
+      context: ./angular-app
+    image: angular-app
     ports:
-      - '0.0.0.0:3306:3306'
-    volumes:
-      - demo:/var/lib/mysql
+      - "4200:80"
+
 volumes:
   demo:
