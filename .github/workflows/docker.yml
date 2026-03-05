@@ -20,8 +20,16 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+
+      - name: Build Spring Boot Jar
+        run: |
+          cd springboot/app
+          ./mvnw clean package -DskipTests
+
+
       - name: Build backend image
         run: docker build -t spring-app ./springboot/app
+
 
       - name: Build frontend image
         run: docker build -t angular-app ./angular-app
