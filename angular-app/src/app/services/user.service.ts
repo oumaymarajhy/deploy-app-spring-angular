@@ -8,7 +8,7 @@ import { User } from '../models/User';
 })
 export class UserService {
 
-  baseURL:string="http://172.16.93.174:8081/user"
+  baseURL:string="http://172.16.104.172:8081/user"
   constructor(private  httpClient:HttpClient) { }
 
   getAllUsers():Observable<any>{
